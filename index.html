@@ -69,22 +69,22 @@
         top: "38vw",
         opacity: 1
       });
+    }
 
-      function win() {
-        $("#dmg").css({
-          top: "5vw"
-        }).fadeIn().delay(400).fadeOut(400, function() {
-          $("#win").fadeIn();
-        });
-      }
+    function win() {
+      $("#dmg").css({
+        top: "5vw"
+      }).fadeIn().delay(400).fadeOut(400, function() {
+        $("#win").fadeIn();
+      });
+    }
 
-      function lose() {
-        $("#dmg").css({
-          top: "36vw"
-        }).fadeIn().delay(400).fadeOut(400, function() {
-          $("#lose").fadeIn();
-        });
-      }
+    function lose() {
+      $("#dmg").css({
+        top: "36vw"
+      }).fadeIn().delay(400).fadeOut(400, function() {
+        $("#lose").fadeIn();
+      });
     }
   </script>
 </body>
