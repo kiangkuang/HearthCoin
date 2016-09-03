@@ -9,41 +9,46 @@
   <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
   <style>
-    .glow {
-      box-shadow: lime 0px 0px 40px 15px;
+    img {
+      user-drag: none;
+      user-select: none;
+      -moz-user-select: none;
+      -webkit-user-drag: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
     }
   </style>
 </head>
 
-<body style="margin: 0px;">
-  <div id="board" style="background: url('board.jpg'); background-size: contain; background-position: top center; background-repeat: no-repeat; height: 720px; width: 1280px;">
-    <div class="card glow" style="height: 230px; width: 155px; left: 550px; top: 470px; position: absolute;">
-      <img src="coin.png" style="height: 250px; left: -19px;top: -16px; position: absolute;">
-    </div>
-    <img src="dmg.png" class="dmg" style="display: none; left: 585px; position: absolute;">
-    <img src="victory.png" class="win" style="display: none; height: 500px; left: 350px; top: 120px; position: absolute;">
-    <img src="defeat.png" class="lose" style="display: none; height: 500px; left: 350px; top: 120px; position: absolute;">
+<body style="margin: 0px; background: black; overflow: hidden;">
+  <div id="board" style="margin: 0 auto 0 auto;">
+    <img src="board.jpg" style="width: 100vw;">
+    <img src="coin-g.png" class="card" style="position: fixed; top: 38vw; left: 44vw; width: 12vw; opacity: 0;">
+    <img src="dmg.png" class="dmg" style="display: none; position: fixed; left: 44vw; width: 11vw;">
+    <img src="victory.png" class="win" style="display:none; width: 47vw; left: 27vw; top: 7vw; position: fixed;">
+    <img src="defeat.png" class="lose" style="display:none; width: 47vw; left: 27vw; top: 9vw; position: fixed;">
   </div>
   <script>
+    setTimeout(draw, 400);
     $(".card").draggable({
       containment: "parent",
       stop: function() {
-        if ($(".card").position().top < 350) {
-          $(".card").removeClass("glow").fadeOut();
-          $(".card img").animate({
-            height: 300,
-            left: $(".card img").position().left - 20,
-            top: $(".card img").position().top - 20
+        if ($(".card").position().top < $("#board").height() * 0.4) {
+          $(".card").animate({
+            opacity: 0,
+            width: "15vw",
+            left: $(".card").position().left - document.documentElement.clientWidth * 0.02,
+            top: $(".card").position().top - document.documentElement.clientWidth * 0.02
           }, function() {
             if (Math.random() > 0.5) {
               $(".dmg").css({
-                top: '72px'
+                top: '5vw'
               }).fadeIn().delay(400).fadeOut(400, function() {
                 $(".win").fadeIn();
               });
             } else {
               $(".dmg").css({
-                top: '485px'
+                top: '36vw'
               }).fadeIn().delay(400).fadeOut(400, function() {
                 $(".lose").fadeIn();
               });
@@ -51,26 +56,29 @@
           });
         } else {
           $(".card").animate({
-            left: 550,
-            top: 470
+            left: "44vw",
+            top: "38vw"
           });
         }
       }
     });
     $(".win, .lose").click(function(e) {
       // reset
-      $(e.target).fadeOut(400, function() {
-        $(".card img").css({
-          height: 250,
-          left: -19,
-          top: -16
-        });
-        $(".card").addClass("glow").css({
-          left: 550,
-          top: 470
-        }).fadeIn();
-      });
+      $(e.target).fadeOut(400, draw);
     });
+
+    function draw() {
+      $(".card").css({
+        width: "12vw",
+        left: "70vw",
+        top: "26vw",
+        opacity: 0
+      }).animate({
+        left: "44vw",
+        top: "38vw",
+        opacity: 1
+      });
+    }
   </script>
 </body>
 
