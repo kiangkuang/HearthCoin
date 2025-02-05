@@ -1,92 +1,13 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>HearthCoin</title>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-  <style>
-    img {
-      user-drag: none;
-      user-select: none;
-      -moz-user-select: none;
-      -webkit-user-drag: none;
-      -webkit-user-select: none;
-      -ms-user-select: none;
-    }
-  </style>
-</head>
-
-<body style="margin: 0px; background: black; overflow: hidden;">
-  <img src="board.jpg" id="board" style="width: 100vw;">
-  <img src="coin-g.png" id="card" style="position: fixed; top: 38vw; left: 44vw; width: 12vw; opacity: 0;">
-  <img src="dmg.png" id="dmg" style="display: none; position: fixed; left: 46vw; width: 8vw;">
-  <img src="victory.png" id="win" style="display: none; width: 47vw; left: 27vw; top: 7vw; position: fixed;">
-  <img src="defeat.png" id="lose" style="display: none; width: 47vw; left: 27vw; top: 9vw; position: fixed;">
-
-  <script>
-    setTimeout(drawCard, 400);
-    $("#card").draggable({
-      containment: "parent",
-      stop: function() {
-        if ($("#card").position().top < $("#board").height() * 0.4) {
-          $("#card").animate({
-            opacity: 0,
-            width: "15vw",
-            left: $("#card").position().left - document.documentElement.clientWidth * 0.02,
-            top: $("#card").position().top - document.documentElement.clientWidth * 0.02
-          }, function() {
-            if (Math.random() < 0.5) {
-              win();
-            } else {
-              lose();
-            }
-          });
-        } else {
-          $("#card").animate({
-            left: "44vw",
-            top: "38vw"
-          });
-        }
-      }
-    });
-
-    $("#win, #lose").click(function(e) {
-      $(e.target).fadeOut(400, drawCard);
-    });
-
-    function drawCard() {
-      $("#card").css({
-        width: "12vw",
-        left: "70vw",
-        top: "26vw",
-        opacity: 0
-      }).animate({
-        left: "44vw",
-        top: "38vw",
-        opacity: 1
-      });
-    }
-
-    function win() {
-      $("#dmg").css({
-        top: "6vw"
-      }).fadeIn().delay(400).fadeOut(400, function() {
-        $("#win").fadeIn();
-      });
-    }
-
-    function lose() {
-      $("#dmg").css({
-        top: "38vw"
-      }).fadeIn().delay(400).fadeOut(400, function() {
-        $("#lose").fadeIn();
-      });
-    }
-  </script>
-</body>
-
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
